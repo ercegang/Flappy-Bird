@@ -12,13 +12,36 @@ public class Bird : MonoBehaviour
     public TMP_Text scoreText;
     public float speed;
     public GameObject endScreen;
+    public GameObject yellowBird;
+    public GameObject redBird;
+    public GameObject blueBird;
+
     private void Start()
 
 
 
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        yellowBird.SetActive(true);
+        int num = Random.Range(0, 2);
+        if (num == 0)
+        {
+            yellowBird.SetActive(true);
+            redBird.SetActive(false);
+            blueBird.SetActive(false);
+        }
+        if (num == 1)
+        {
+            yellowBird.SetActive(false);
+            redBird.SetActive(true);
+            blueBird.SetActive(false);
+        }
+        if (num == 2)
+        {
+            yellowBird.SetActive(false);
+            redBird.SetActive(false);
+            blueBird.SetActive(true);
+        }
     }
 
 
@@ -51,9 +74,7 @@ public class Bird : MonoBehaviour
     {
         speed = 0;
         Invoke("ShowMenu",1f);
-
-        //var currentScene = SceneManager.GetActiveScene().name;
-        //SceneManager.LoadScene(currentScene);
+        
     }
 
     void ShowMenu()
