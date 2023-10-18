@@ -15,6 +15,7 @@ public class Bird : MonoBehaviour
     public GameObject yellowBird;
     public GameObject redBird;
     public GameObject blueBird;
+    public GameObject flashBang;
 
     private void Start()
 
@@ -22,28 +23,28 @@ public class Bird : MonoBehaviour
 
     {
         rb = GetComponent<Rigidbody2D>();
-        yellowBird.SetActive(true);
-        int num = Random.Range(0, 2);
-        if (num == 0)
+        ChooseSkin();
+    }
+    public void ChooseSkin()
+    {
+
+        var num = Random.Range(0f, 1f);
+        if (num < 0.33f)
         {
             yellowBird.SetActive(true);
-            redBird.SetActive(false);
-            blueBird.SetActive(false);
         }
-        if (num == 1)
+        else if (num < 0.66f)
         {
-            yellowBird.SetActive(false);
             redBird.SetActive(true);
-            blueBird.SetActive(false);
         }
-        if (num == 2)
+        else
         {
-            yellowBird.SetActive(false);
-            redBird.SetActive(false);
             blueBird.SetActive(true);
         }
+        
     }
 
+    
 
 
 
@@ -74,7 +75,8 @@ public class Bird : MonoBehaviour
     {
         speed = 0;
         Invoke("ShowMenu",1f);
-        
+        PlayerPrefs.SetInt("score", score);
+        flashBang.SetActive(true);
     }
 
     void ShowMenu()
@@ -82,6 +84,7 @@ public class Bird : MonoBehaviour
         scoreText.text = "";
         endScreen.SetActive(true);
         print("end screen");
+
 
     }
 
