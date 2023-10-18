@@ -16,6 +16,9 @@ public class Bird : MonoBehaviour
     public GameObject redBird;
     public GameObject blueBird;
     public GameObject flashBang;
+    public AudioSource jump;
+    public AudioSource die;
+    public AudioSource scr;
 
     private void Start()
 
@@ -52,12 +55,15 @@ public class Bird : MonoBehaviour
     {
         if(Input.GetMouseButton(0) && speed > 0)
         {
-           rb.velocity = Vector2.up * jumpSpeed; 
+           rb.velocity = Vector2.up * jumpSpeed;
+            jump.Play();
         }
 
         transform.eulerAngles = new Vector3(0, 0, rb.velocity.y * 7f);
 
         Pipe.speed = speed;
+
+       
     }
 
 
@@ -77,6 +83,9 @@ public class Bird : MonoBehaviour
         Invoke("ShowMenu",1f);
         PlayerPrefs.SetInt("score", score);
         flashBang.SetActive(true);
+
+        die.Play();
+
     }
 
     void ShowMenu()
@@ -97,6 +106,8 @@ public class Bird : MonoBehaviour
         score++;
 
         scoreText.text = score.ToString();
+
+        scr.Play();
         
     }
     

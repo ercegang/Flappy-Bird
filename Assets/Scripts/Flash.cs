@@ -17,5 +17,6 @@ public class Flash : MonoBehaviour
         color.a -= Time.deltaTime;
 
         renderer.color = color;
+        
     }
 }
